@@ -1,0 +1,52 @@
+@import "variables";
+
+
+//Background Image of Page
+body {
+    background-image: url("../images/meteor.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.top-section {
+    background-color: rgba(0, 0, 0, 0.377);
+}
+.top-header {
+    box-shadow: 2px 2px 3px 3px rgba(255, 255, 255, 0.226);
+}
+
+.page-title {
+    font-family: $amiri;
+}
+.nav-menu{
+    .nav-link {
+        color: white;
+    }
+}
+.nav-link:hover {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.control-bar {
+    justify-content: center;
+    margin-top: 5px;
+    #addCard, #removeCards {
+        margin-right: 5px;
+        margin-top: 20px;
+    }
+}
+
+.main-content {
+    background-color: rgba(0, 0, 0, 0.377);
+    margin-top: 30px;
+    width: auto;
+    height: auto;
+}
+
+
+
+//Disabled for now
+#signOut {
+    display: none;
+}

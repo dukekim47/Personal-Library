@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Kalam&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amiri&display=swap");
+body {
+  background-image: url("../images/meteor.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.top-section {
+  background-color: rgba(0, 0, 0, 0.377);
+}
+
+.top-header {
+  -webkit-box-shadow: 2px 2px 3px 3px rgba(255, 255, 255, 0.226);
+          box-shadow: 2px 2px 3px 3px rgba(255, 255, 255, 0.226);
+}
+
+.page-title {
+  font-family: "Amiri", serif;
+}
+
+.nav-menu .nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.control-bar {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 5px;
+}
+
+.control-bar #addCard, .control-bar #removeCards {
+  margin-right: 5px;
+  margin-top: 20px;
+}
+
+.main-content {
+  background-color: rgba(0, 0, 0, 0.377);
+  margin-top: 30px;
+  width: auto;
+  height: auto;
+}
+
+#signOut {
+  display: none;
+}
+/*# sourceMappingURL=main.css.map */

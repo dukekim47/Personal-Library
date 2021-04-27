@@ -15,7 +15,7 @@ body {
     box-shadow: 2px 2px 3px 3px rgba(255, 255, 255, 0.226);
 }
 
-.page-title {
+.brand-name {
     font-family: $amiri;
 }
 .nav-menu{
@@ -51,4 +51,17 @@ body {
 //Disabled for now
 #signOut {
     display: none;
+}
+
+.navbar-toggler {
+    color: white;
+}
+
+button {
+    color: white;
+}
+
+.header-nav {
+    margin-left: 0;
+    margin-right: 0;
 }

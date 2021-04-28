@@ -11,9 +11,9 @@
   const auth = firebase.auth();
 
   function signUp() {
-      let email = document.getElementById("email-input-su");
-      let password = document.getElementById("password-input-su");
-      auth.createUserWithEmailAndPassword(email.value, password.value)
+      let email = document.getElementById("email-input-su").value;
+      let password = document.getElementById("password-input-su").value;
+      auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
           let user = userCredential.user;
       })
@@ -22,4 +22,3 @@
           let errorMessage = error.message;
       });
   }
-

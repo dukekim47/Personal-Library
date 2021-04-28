@@ -17,6 +17,8 @@ body {
 
 .brand-name {
     font-family: $amiri;
+    margin-top: 10px;
+    cursor: default;
 }
 .nav-menu{
     .nav-link {
@@ -46,9 +48,29 @@ body {
     padding-left: 30px;
 }
 
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    span {
+        font-size: 1.3rem;
+    }
+}
+
+.sign-up-text {
+    position: absolute;
+    left: 1rem;
+}
+
+/* #log-in-user {
+    margin-top: 10px;
+}
+*/
 
 
-//Disabled for now
+/*Disabled for now
 #signOut {
     display: none;
 }
@@ -65,3 +87,4 @@ button {
     margin-left: 0;
     margin-right: 0;
 }
+*/

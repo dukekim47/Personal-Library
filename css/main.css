@@ -49,7 +49,8 @@ body {
   width: auto;
   height: auto;
   padding-bottom: 30px;
-  padding-left: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .close-btn {
@@ -69,8 +70,16 @@ body {
   left: 1rem;
 }
 
+.card {
+  margin-right: 5px;
+}
+
 #sign-out {
   display: block;
+}
+
+#submit-card {
+  float: right;
 }
 
 /* #log-in-user {

@@ -3,17 +3,22 @@
     apiKey: "AIzaSyCwwqK3_ZSTidDRwNEE-T50j9PKQ6wX0Ws",
     authDomain: "personal-library-c5a4b.firebaseapp.com",
     projectId: "personal-library-c5a4b",
+    storageBucket: "personal-library-c5a4b.appspot.com",
+    messagingSenderId: "396802370606",
     appId: "1:396802370606:web:43cc8dd374e4a8c4a083bf"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-
   //Sign Up in Firebase with email and password//
   const auth = firebase.auth();
   const db = firebase.firestore();
 
-auth.onAuthStateChanged(user => console.log(user))
+auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log("logged in")
+    } else console.log("not logged in");
+})
 
 
   function signUp() {
@@ -67,3 +72,7 @@ auth.signOut().then(() => {
 
 
 db.settings({timestampsInSnapshots: true});
+
+db.collection("library").get().then(snapshot => {
+    setupCard(snapshot.docs);
+})

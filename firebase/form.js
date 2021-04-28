@@ -8,7 +8,13 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+
+  //Sign Up in Firebase with email and password//
   const auth = firebase.auth();
+  const db = firebase.firestore();
+
+auth.onAuthStateChanged(user => console.log(user))
+
 
   function signUp() {
       let email = document.getElementById("email-input-su").value;
@@ -16,9 +22,48 @@
       auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
           let user = userCredential.user;
+          alert("You have been successfully signed up")
       })
       .catch((error) => {
+          alert("Oops, something went wrong")
           let errorCode = error.code;
           let errorMessage = error.message;
       });
   }
+
+
+
+//Login in Firebase with email and password//
+
+  function login() {
+    let email = document.getElementById("login-email").value;
+    let password = document.getElementById("login-password").value;
+    auth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+        let user = userCredential.user;
+        alert("You have been successfully logged in")
+    })
+    .catch((error) => {
+        alert("You were unable to login, please double check your email and password");
+        let errorCode = error.code;
+        let errorMessage = error.message;
+    });
+}
+
+
+//Sign Out 
+
+function logout () {
+    if(auth.currentUser !== null) {
+auth.signOut().then(() => {
+    alert("You have successfuly signed Out. See you again!")
+  }).catch((error) => {
+    alert("Oops, Something went wrong")
+    // An error happened.
+  });
+    } else alert("You are not signed in");
+}
+
+
+
+db.settings({timestampsInSnapshots: true});

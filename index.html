@@ -30,10 +30,10 @@
                     <a class="nav-link" href="#">Blog</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#signIn">Sign In</a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#login">Sign In</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="sign-out" href="#" data-toggle="modal" data-target="#">Sign out</a>
+                    <a class="nav-link" id="sign-out">Sign out</a>
                   </li>
               </ul>
             </div>
@@ -67,7 +67,7 @@
         </div>
     </main>
 
-    <div class="modal fade" id="signIn" tabindex="-1">
+    <div class="modal fade" id="login" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -79,15 +79,15 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                      <label for="email-input">Email address</label>
-                      <input type="email" class="form-control" id="email-input">
+                      <label for="login-email">Email address</label>
+                      <input type="email" class="form-control" id="login-email">
                       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
-                      <label for="password-input">Password</label>
-                      <input type="password" class="form-control" id="password-input">
+                      <label for="login-password">Password</label>
+                      <input type="password" class="form-control" id="login-password">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2" id="log-in-user">Log In</button>
+                    <button class="btn btn-primary mt-2" id="signIn" data-dismiss="modal">Log In</button>
                   </form>
             </div>
             <div class="modal-footer">
@@ -119,7 +119,7 @@
                       <label for="password-input">Password</label>
                       <input type="password" class="form-control" id="password-input-su">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2" id="sign-up-user">Sign Up</button>
+                    <button type="submit" class="btn btn-primary mt-2" data-dismiss="modal" data-toggle="modal" id="sign-up-user">Sign Up</button>
                   </form>
             </div>
           </div>

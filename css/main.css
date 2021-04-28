@@ -69,6 +69,10 @@ body {
   left: 1rem;
 }
 
+#sign-out {
+  display: block;
+}
+
 /* #log-in-user {
     margin-top: 10px;
 }

@@ -25,16 +25,21 @@ form.addEventListener("submit", (e) => {
 })
 
 
-//Brings Data from Firestore into DOM into main content container
-const setupCard = (data) => {
+
+
+//Brings Data from Firestore into DOM into main content container. Assigns Unique Id and content of each document into HTML
+const setupCard = (changes) => {
     let html = "";
-    data.forEach(book => {
-        const cards = book.data();
+    changes.forEach(book => {
+        let uniqueID = book.doc.id;
+        if (book.type === "added") {
+            console.log(book, book.type)
+        const cards = book.doc.data();
         const li = `
-        <div class="card">
+        <div class="card" data-id="${book.doc.id}">  
           <div class="card-body">
             <h5 class="card-title">${cards.title}</h5>
-            <button type="button" class="close-btn">
+            <button type="button" class="close-btn close-card">
                 <span class="text-dark close-x">&times;</span>
             </button>
             <p class="card-text">${cards.content}</p>
@@ -43,8 +48,22 @@ const setupCard = (data) => {
           </div>
         </div>`
         html += li;
-    });
+    } else if (book.type ==="removed") {
+        let removedCard = mainContent.querySelector("[data-id =" + uniqueID + "]");
+        mainContent.removeChild(removedCard);
+
+    } 
+});
     mainContent.innerHTML = html;
+
+    //Event listener for close buttons assigned to each individual card.
+    const closeBtn = document.querySelectorAll(".close-card");
+    closeBtn.forEach(button => {
+        button.addEventListener("click", () => {
+            let id = button.parentElement.parentElement.getAttribute("data-id");
+            db.collection("library").doc(id).delete();
+    })
+})
 }
 
 //Adding Cards into Main Container

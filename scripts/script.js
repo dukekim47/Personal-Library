@@ -32,39 +32,48 @@ const setupCard = (changes) => {
     let html = "";
     changes.forEach(book => {
         let uniqueID = book.doc.id;
+        const cards = book.doc.data();
+        const outerDiv = document.createElement("div");
+        outerDiv.classList.add("card");
+        outerDiv.setAttribute("data-id", uniqueID)
+        const innerDiv = document.createElement("div");
+        innerDiv.classList.add("card-body");
+        const heading = document.createElement("h5");
+        heading.classList.add("card-title")
+        heading.textContent = cards.title;
+        const button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.classList.add("close-btn", "close-card");
+        button.innerHTML = "&times;";
+        button.addEventListener("click", (e) => {
+            e.stopPropagation();
+            db.collection("library").doc(uniqueID).delete();
+            mainContent.removeChild(outerDiv);
+        })
+        const text = document.createElement("p");
+        text.classList.add("card-text");
+        text.textContent = cards.content;
+        const footer = document.createElement("div")
+        footer.classList.add("card-footer");
+        footer.textContent = cards.footer;
+        
         if (book.type === "added") {
             console.log(book, book.type)
-        const cards = book.doc.data();
-        const li = `
-        <div class="card" data-id="${book.doc.id}">  
-          <div class="card-body">
-            <h5 class="card-title">${cards.title}</h5>
-            <button type="button" class="close-btn close-card">
-                <span class="text-dark close-x">&times;</span>
-            </button>
-            <p class="card-text">${cards.content}</p>
-        </div>
-          <div class="card-footer">${cards.footer}</div>
-          </div>
-        </div>`
-        html += li;
-    } else if (book.type ==="removed") {
-        let removedCard = mainContent.querySelector("[data-id =" + uniqueID + "]");
-        mainContent.removeChild(removedCard);
-
-    } 
-});
-    mainContent.innerHTML = html;
+            mainContent.appendChild(outerDiv);
+            outerDiv.appendChild(innerDiv);
+            innerDiv.appendChild(heading);
+            innerDiv.appendChild(button);
+            innerDiv.appendChild(text);
+            outerDiv.appendChild(footer);
+        } else if (book.type ==="removed") {
+            let removedCard = document.querySelector(`[data-id = ${uniqueID}]`);
+            mainContent.removeChild(removedCard);
+        } 
+    }
+);}
 
     //Event listener for close buttons assigned to each individual card.
-    const closeBtn = document.querySelectorAll(".close-card");
-    closeBtn.forEach(button => {
-        button.addEventListener("click", () => {
-            let id = button.parentElement.parentElement.getAttribute("data-id");
-            db.collection("library").doc(id).delete();
-    })
-})
-}
+    
 
 //Adding Cards into Main Container
 function addCard () {

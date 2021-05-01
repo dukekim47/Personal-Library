@@ -25,6 +25,8 @@ form.addEventListener("submit", (e) => {
     })
 })
 
+const body = document.getElementsByTagName("body");
+const editModalForm = document.getElementById("edit-card");
 
 
 
@@ -36,8 +38,21 @@ const renderCard = (changes) => {
         let htmlID = `_${book.doc.id}`;
         const cards = book.doc.data();
         const outerDiv = document.createElement("div");
+        outerDiv.setAttribute("data-toggle", "modal");
+        outerDiv.setAttribute("data-target", "#openModal");
         outerDiv.classList.add("card");
         outerDiv.setAttribute("data-id", htmlID)
+        outerDiv.addEventListener("click", (e) => {
+            let thisCard = e.target.parentNode.parentNode;
+            let thisID = thisCard.getAttribute("data-id").slice(1);
+            db.collection("library").doc(thisID).get().then(snapshot => {
+                let retrievedData = snapshot.data();
+                editModalForm.title.value = retrievedData.title;
+                editModalForm.content.value = retrievedData.content;
+                editModalForm.footer.value = retrievedData.footer;
+                editModalForm.checkbox.checked = retrievedData.read;
+            });
+        });
         const innerDiv = document.createElement("div");
         innerDiv.classList.add("card-body");
         const heading = document.createElement("h5");
@@ -58,7 +73,7 @@ const renderCard = (changes) => {
         footer.classList.add("card-footer");
         footer.textContent = cards.footer;
         const readStatus = document.createElement("p");
-        
+
 
         if (book.type === "added") {
             console.log(book, book.type)
@@ -83,4 +98,38 @@ const renderCard = (changes) => {
         }
     }
     );
+}
+
+// Updating Data within Cards
+
+
+function openCard(outerDiv) {
+    outerDiv.addEventListener("click", () => {
+
+
+    })
+
+}
+
+function editModalCard(cards) {
+    let editCard = document.getElementById("edit-card");
+    editCard.title.value = cards.title
+    editCard.content.value = cards.content
+    editCard.footer.value = cards.footer
+
+    let checkbox = document.getElementById("update-read");
+    if (cards.read) {
+        let checkbox = document.getElementById("update-read");
+        checkbox.checked = true;
+    } else { checkbox.checked = false }
+}
+
+function removeEditModal() {
+    let openModal = document.getElementById("openModal");
+    body.removeChild = openModal;
+}
+
+function editCard(e) {
+    let card = e.target.querySelector("div[data-id]");
+    console.log(card)
 }

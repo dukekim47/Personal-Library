@@ -69,8 +69,9 @@ body {
     margin-right: 5px;;
 }
 
-//.sign-up-btn {
-//}
+.card-title {
+    margin-bottom: 1.25rem;
+}
 
 #sign-out {
     display:block;
@@ -80,28 +81,16 @@ body {
     float:right;
 }
 
-
-/* #log-in-user {
-    margin-top: 10px;
-}
-*/
-
-
-/*Disabled for now
-#signOut {
-    display: none;
+.read-card {
+    color: $complete;
+    margin: 0;
+    position: relative;
+    right: 0;
 }
 
-.navbar-toggler {
-    color: white;
+.not-read-card {
+    color: $incomplete;
+    margin: 0;
+    position: relative;
+    right: 0;
 }
-
-button {
-    color: white;
-}
-
-.header-nav {
-    margin-left: 0;
-    margin-right: 0;
-}
-*/

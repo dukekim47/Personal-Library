@@ -81,28 +81,7 @@ db.collection("library").get().then(snapshot => {
 //Real Time listener
 db.collection("library").orderBy("title").onSnapshot(snapshot => {
   let changes = snapshot.docChanges();
-  setupCard(changes);
+  renderCard(changes);
 })
 
-    /*
-  })
-  if (ch.type ==="removed") {
-    let cards = mainContent.querySelector("[data-id =" + book.doc.id + "]")
-    mainContent.removeChild(cards);
-}})
-
-
-
-
-
-/*
-  changes.forEach(change => {
-    if(change.type === "added") {
-    setupCard(change.doc);
-  } else if (change.type == "removed") {
-    let cards = mainContent.querySelector("[data-id" + change.doc.id + "]");
-    mainContent.removeChild(cards);
-  }
-  })
-})*/
 

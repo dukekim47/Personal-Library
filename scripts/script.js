@@ -11,7 +11,7 @@ const signOut = document.getElementById("sign-out");
 signOut.addEventListener("click", logout)
 
 //The main content container
-const mainContent = document.querySelector(".main-content"); 
+const mainContent = document.querySelector(".main-content");
 
 //Form for Cards
 const form = document.getElementById("add-card");
@@ -20,7 +20,8 @@ form.addEventListener("submit", (e) => {
     db.collection("library").add({
         title: form.title.value,
         content: form.content.value,
-        footer: form.footer.value
+        footer: form.footer.value,
+        read: form.read.checked
     })
 })
 
@@ -28,14 +29,15 @@ form.addEventListener("submit", (e) => {
 
 
 //Brings Data from Firestore into DOM into main content container. Assigns Unique Id and content of each document into HTML
-const setupCard = (changes) => {
+const renderCard = (changes) => {
     let html = "";
     changes.forEach(book => {
         let uniqueID = book.doc.id;
+        let htmlID = `_${book.doc.id}`;
         const cards = book.doc.data();
         const outerDiv = document.createElement("div");
         outerDiv.classList.add("card");
-        outerDiv.setAttribute("data-id", uniqueID)
+        outerDiv.setAttribute("data-id", htmlID)
         const innerDiv = document.createElement("div");
         innerDiv.classList.add("card-body");
         const heading = document.createElement("h5");
@@ -48,7 +50,6 @@ const setupCard = (changes) => {
         button.addEventListener("click", (e) => {
             e.stopPropagation();
             db.collection("library").doc(uniqueID).delete();
-            mainContent.removeChild(outerDiv);
         })
         const text = document.createElement("p");
         text.classList.add("card-text");
@@ -56,7 +57,9 @@ const setupCard = (changes) => {
         const footer = document.createElement("div")
         footer.classList.add("card-footer");
         footer.textContent = cards.footer;
+        const readStatus = document.createElement("p");
         
+
         if (book.type === "added") {
             console.log(book, book.type)
             mainContent.appendChild(outerDiv);
@@ -65,17 +68,19 @@ const setupCard = (changes) => {
             innerDiv.appendChild(button);
             innerDiv.appendChild(text);
             outerDiv.appendChild(footer);
-        } else if (book.type ==="removed") {
-            let removedCard = document.querySelector(`[data-id = ${uniqueID}]`);
+            if (cards.read) {
+                readStatus.textContent = "Complete";
+                readStatus.classList.add("read-card");
+                footer.appendChild(readStatus);
+            } else {
+                readStatus.textContent = "Incomplete";
+                readStatus.classList.add("not-read-card");
+                footer.appendChild(readStatus);
+            }
+        } else if (book.type === "removed") {
+            let removedCard = document.querySelector(`[data-id = _${uniqueID}]`);
             mainContent.removeChild(removedCard);
-        } 
+        }
     }
-);}
-
-    //Event listener for close buttons assigned to each individual card.
-    
-
-//Adding Cards into Main Container
-function addCard () {
-    const form = document.getElementById("add-card")  
-  }
+    );
+}

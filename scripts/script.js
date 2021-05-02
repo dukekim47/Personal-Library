@@ -17,7 +17,7 @@ const mainContent = document.querySelector(".main-content");
 const form = document.getElementById("add-card");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    db.collection("library").add({
+    db.collection(auth.currentUser.uid).add({
         title: form.title.value,
         content: form.content.value,
         footer: form.footer.value,
@@ -51,7 +51,7 @@ const renderCard = (changes) => {
             let thisCard = e.target.parentNode.parentNode;
             let thisID = thisCard.getAttribute("data-id").slice(1);
             editModal.setAttribute("data-id", thisID);
-            db.collection("library").doc(thisID).get().then(snapshot => {
+            db.collection(auth.currentUser.uid).doc(thisID).get().then(snapshot => {
                 let retrievedData = snapshot.data();
                 editModalForm.title.value = retrievedData.title;
                 editModalForm.content.value = retrievedData.content;
@@ -74,7 +74,7 @@ const renderCard = (changes) => {
         //Event Listener to Delete Data from Firestore
         button.addEventListener("click", (e) => {
             e.stopPropagation();
-            db.collection("library").doc(uniqueID).delete();
+            db.collection(auth.currentUser.uid).doc(uniqueID).delete();
         })
         ////Event Listener to Delete Data from Firestore (End)
 
@@ -133,7 +133,7 @@ const edit = document.getElementById("edit-card");
 edit.addEventListener("submit", (e) => {
     e.preventDefault();
     let uniqueID = edit.parentElement.getAttribute("data-id");
-    db.collection("library").doc(uniqueID).update({
+    db.collection(auth.currentUser.uid).doc(uniqueID).update({
         title: edit.title.value,
         content: edit.content.value,
         footer: edit.footer.value,
@@ -160,3 +160,6 @@ function closeModal(modalId) {
       document.body.removeChild(modalBackdrops[0]);
   }
 
+  function underConstruction () {
+      alert("This is under construction. Sorry for the inconvenience")
+  }

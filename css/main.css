@@ -78,6 +78,10 @@ body {
   margin-bottom: 1.25rem;
 }
 
+.card-text {
+  text-align: left;
+}
+
 #sign-out {
   display: block;
 }
@@ -98,5 +102,15 @@ body {
   margin: 0;
   position: relative;
   right: 0;
+}
+
+#sign-in, #sign-out {
+  cursor: pointer;
+}
+
+.disabled-nav {
+  text-decoration: line-through;
+  color: grey;
+  cursor: none;
 }
 /*# sourceMappingURL=main.css.map */
